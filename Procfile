@@ -1,1 +1,1 @@
-web: gunicorn app-personalize.wsgi
+web: gunicorn Personalize.wsgi
