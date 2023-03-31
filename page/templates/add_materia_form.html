@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+
+{% block Title %}Matérias{% endblock Title %}
+{% block TituloPagina %}<h1>Adicionar Matérias para Aluno</h1>{% endblock TituloPagina %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-12">
+        <form method="POST">
+            
+            {% csrf_token %}
+            {% bootstrap_form form %}
+
+            <button class="btn btn-primary" type="submit">Salvar</button>
+        </form>
+    </div>
+</div>
+
+{% endblock content %}

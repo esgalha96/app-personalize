@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+
+{% block Title %}Matérias{% endblock Title %}
+{% block TituloPagina %}<h1>Deletar Matérias do Aluno</h1>{% endblock TituloPagina %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-12">
+        <form method="POST">
+            
+            {% csrf_token %}
+            {% bootstrap_form form %}
+
+            <button class="btn btn-danger" onclick="return confirm('Deseja confirmar essa operação?')" type="submit">Deletar todas matérias do aluno</button>
+        </form>
+    </div>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+
+
+{% block Title %}Perfil{% endblock Title %}
+{% block TituloPagina %}<h1>Perfil do Aluno</h1>{% endblock TituloPagina %}
+
+{% block content %}
+
+<h2>Bem vindo à página da Personalize, {{ user.first_name }}!</h2>
+
+{% if user.is_superuser %}
+
+<div class="row">
+    <div class="col-3">
+        <form method="POST">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+        </form>
+    </div>
+</div>
+
+{% endif %}
+
+<div class="row">
+    <div class="col-12">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col" style="width: 14.28%;">Segunda</th>
+                    <th scope="col" style="width: 14.28%;">Terça</th>
+                    <th scope="col" style="width: 14.28%;">Quarta</th>
+                    <th scope="col" style="width: 14.28%;">Quinta</th>
+                    <th scope="col" style="width: 14.28%;">Sexta</th>
+                    <th scope="col" style="width: 14.28%;">Sábado</th>
+                    <th scope="col" style="width: 14.28%;">Domingo</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for materia in materias_aluno_logado %}
+                <tr>
+                    {% for dia_da_semana in dias_semana %}
+                        {% if materia.dia_semana == dia_da_semana  %}
+                            <td scope="row">{{ materia.materia }} ({{ materia.horario_inicial }} às {{ materia.horario_final }})
+                                
+                                {% if user.is_superuser %}
+                                <input type="hidden" name="id_materia_aluno_logado" value="{{ materia.id }}">
+                                <form action="" method="post">
+                                    {% csrf_token %}
+                                    <button name="excluir_materia_aluno" onclick="return confirm('Deseja excluir esse registro?')"
+                                     class="btn btn-primary btn-danger btn-sm" value="{{ materia.id }}">
+                                        <span class="material-icons">close</span>
+                                    </button>
+                                </form>
+
+                                {% endif %}
+                            </td>
+                        {% else %}
+                            <td scope="row"></td>
+                        {% endif %}
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock content %}

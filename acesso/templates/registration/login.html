@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+
+{% block Title %}Login{% endblock Title %}
+{% block TituloPagina %}<h1>Login</h1>{% endblock TituloPagina %}
+
+{% block content %}
+
+    {% if form.errors %}
+    <p>Usuário ou senha incompatíveis! Tente novamente.</p>
+    {% endif %}
+
+    {% if next %}
+        {% if user.is_authenticated %}
+            <p>Sua conta não tem acesso à essa página.</p>
+        {% else %}
+            <p>Please login to see this page.</p>
+        {% endif %}
+    {% endif %}
+
+    <div class="row justify-content-md-center">
+        <div class="col-4">
+            <form method="post" action="{% url 'login' %}">
+                {% csrf_token %}
+                {% bootstrap_form form %}
+                <input type="submit" class="btn btn-primary" value="Login">
+            </form>
+            <p><a href="{% url 'password_reset' %}">Esqueci a senha.</a></p>
+        </div>
+    </div>
+
+    
+
+
+{% endblock content %}
