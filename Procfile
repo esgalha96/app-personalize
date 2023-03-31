@@ -1,1 +1,1 @@
-web: gunicorn Personalize.wsgi
+web: gunicorn app-personalize.wsgi --log-file -
