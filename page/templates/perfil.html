@@ -5,6 +5,21 @@
 {% block Title %}Perfil{% endblock Title %}
 {% block TituloPagina %}<h1>Perfil do Aluno</h1>{% endblock TituloPagina %}
 
+{% block head %}
+
+<style>
+    .btn_text_red{
+        color: red;
+    }
+
+    .quebra_linha{
+        word-break: break-all;
+    }
+
+</style>
+
+{% endblock head%}
+
 {% block content %}
 
 <h2>Bem vindo à página da Personalize, {{ user.first_name }}!</h2>
@@ -26,82 +41,156 @@
     <div class="col-12">
 
         <div class="row">
-            <div class="col" style="width: 14.28%; font-weight: bold;">
-                <span>Domingo</span>
+            <div class="col" style="width: 14.28%; font-weight: bold; border-right: solid; border-right-style: ridge;">
+                <span class="quebra_linha">Domingo</span>
+
+                {% for materia in materias_aluno_domingo %}
+                <div class="row">
+                    <div class="col-12" style="font-weight: normal; ">
+                        <p class="quebra_linha">{{ materia.materia }} ({{ materia.horario_inicial }} às {{ materia.horario_final }})</p>
+                        {% if user.is_superuser %}
+                        <input type="hidden" name="id_materia_aluno_logado" value="{{ materia.id }}">
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            <button name="excluir_materia_aluno" onclick="return confirm('Deseja excluir esse registro?')"
+                            class="btn btn_text_red" value="{{ materia.id }}">
+                                <span class="material-icons">close</span>
+                            </button>
+                        </form>
+
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="col" style="width: 14.28%; font-weight: bold; border-right: solid; border-right-style: ridge;">
+                <span class="quebra_linha">Segunda</span>
+                {% for materia in materias_aluno_segunda %}
+                <div class="row">
+                    <div class="col-12" style="font-weight: normal;">
+                        <p class="quebra_linha">{{ materia.materia }} ({{ materia.horario_inicial }} às {{ materia.horario_final }})</p>
+                        {% if user.is_superuser %}
+                        <input type="hidden" name="id_materia_aluno_logado" value="{{ materia.id }}">
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            <button name="excluir_materia_aluno" onclick="return confirm('Deseja excluir esse registro?')"
+                            class="btn btn_text_red" value="{{ materia.id }}">
+                                <span class="material-icons">close</span>
+                            </button>
+                        </form>
+
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="col" style="width: 14.28%; font-weight: bold; border-right: solid; border-right-style: ridge;">
+                <span class="quebra_linha">Terça</span>
+                {% for materia in materias_aluno_terca %}
+                <div class="row">
+                    <div class="col-12" style="font-weight: normal;">
+                        <p class="quebra_linha">{{ materia.materia }} ({{ materia.horario_inicial }} às {{ materia.horario_final }})</p>
+                        {% if user.is_superuser %}
+                        <input type="hidden" name="id_materia_aluno_logado" value="{{ materia.id }}">
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            <button name="excluir_materia_aluno" onclick="return confirm('Deseja excluir esse registro?')"
+                            class="btn btn_text_red" value="{{ materia.id }}">
+                                <span class="material-icons">close</span>
+                            </button>
+                        </form>
+
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="col" style="width: 14.28%; font-weight: bold; border-right: solid; border-right-style: ridge; ">
+                <span class="quebra_linha">Quarta</span>
+                {% for materia in materias_aluno_quarta %}
+                <div class="row">
+                    <div class="col-12" style="font-weight: normal; ">
+                        <p class="quebra_linha">{{ materia.materia }} ({{ materia.horario_inicial }} às {{ materia.horario_final }})</p>
+                        {% if user.is_superuser %}
+                        <input type="hidden" name="id_materia_aluno_logado" value="{{ materia.id }}">
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            <button name="excluir_materia_aluno" onclick="return confirm('Deseja excluir esse registro?')"
+                            class="btn btn_text_red" value="{{ materia.id }}">
+                                <span class="material-icons">close</span>
+                            </button>
+                        </form>
+
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="col" style="width: 14.28%; font-weight: bold; border-right: solid; border-right-style: ridge;">
+                <span class="quebra_linha">Quinta</span>
+                {% for materia in materias_aluno_quinta %}
+                <div class="row">
+                    <div class="col-12" style="font-weight: normal;">
+                        <p class="quebra_linha">{{ materia.materia }} ({{ materia.horario_inicial }} às {{ materia.horario_final }})</p>
+                        {% if user.is_superuser %}
+                        <input type="hidden" name="id_materia_aluno_logado" value="{{ materia.id }}">
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            <button name="excluir_materia_aluno" onclick="return confirm('Deseja excluir esse registro?')"
+                            class="btn btn_text_red" value="{{ materia.id }}">
+                                <span class="material-icons">close</span>
+                            </button>
+                        </form>
+
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="col" style="width: 14.28%; font-weight: bold; border-right: solid; border-right-style: ridge;">
+                <span class="quebra_linha">Sexta</span>
+                {% for materia in materias_aluno_sexta %}
+                <div class="row">
+                    <div class="col-12" style="font-weight: normal;">
+                        <p class="quebra_linha">{{ materia.materia }} ({{ materia.horario_inicial }} às {{ materia.horario_final }})</p>
+                        {% if user.is_superuser %}
+                        <input type="hidden" name="id_materia_aluno_logado" value="{{ materia.id }}">
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            <button name="excluir_materia_aluno" onclick="return confirm('Deseja excluir esse registro?')"
+                            class="btn btn_text_red" value="{{ materia.id }}">
+                                <span class="material-icons">close</span>
+                            </button>
+                        </form>
+
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
             </div>
             <div class="col" style="width: 14.28%; font-weight: bold;">
-                <span>Segunda</span>
-            </div>
-            <div class="col" style="width: 14.28%; font-weight: bold;">
-                <span>Terça</span>
-            </div>
-            <div class="col" style="width: 14.28%; font-weight: bold;">
-                <span>Quarta</span>
-            </div>
-            <div class="col" style="width: 14.28%; font-weight: bold;">
-                <span>Quinta</span>
-            </div>
-            <div class="col" style="width: 14.28%; font-weight: bold;">
-                <span>Sexta</span>
-            </div>
-            <div class="col" style="width: 14.28%; font-weight: bold;">
-                <span>Sábado</span>
+                <span class="quebra_linha">Sábado</span>
+                {% for materia in materias_aluno_sabado %}
+                <div class="row">
+                    <div class="col-12" style="font-weight: normal;">
+                        <p class="quebra_linha">{{ materia.materia }} ({{ materia.horario_inicial }} às {{ materia.horario_final }})</p>
+                        {% if user.is_superuser %}
+                        <input type="hidden" name="id_materia_aluno_logado" value="{{ materia.id }}">
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            <button name="excluir_materia_aluno" onclick="return confirm('Deseja excluir esse registro?')"
+                            class="btn btn_text_red" value="{{ materia.id }}">
+                                <span class="material-icons">close</span>
+                            </button>
+                        </form>
+
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
             </div>
         </div>
 
-
-
-
-
-
-
-
-
-
-
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th scope="col" style="width: 14.28%;">Domingo</th>
-                    <th scope="col" style="width: 14.28%;">Segunda</th>
-                    <th scope="col" style="width: 14.28%;">Terça</th>
-                    <th scope="col" style="width: 14.28%;">Quarta</th>
-                    <th scope="col" style="width: 14.28%;">Quinta</th>
-                    <th scope="col" style="width: 14.28%;">Sexta</th>
-                    <th scope="col" style="width: 14.28%;">Sábado</th>
-                </tr>
-            </thead>
-            <tbody>
-
-                    {% for materia in materias_aluno_logado %}
-                    <tr>
-                        {% for dia_da_semana in dias_semana %}
-                            
-                            {% if materia.dia_semana == dia_da_semana  %}
-                                <td scope="row">{{ materia.materia }} ({{ materia.horario_inicial }} às {{ materia.horario_final }})
-                                    
-                                    {% if user.is_superuser %}
-                                    <input type="hidden" name="id_materia_aluno_logado" value="{{ materia.id }}">
-                                    <form action="" method="post">
-                                        {% csrf_token %}
-                                        <button name="excluir_materia_aluno" onclick="return confirm('Deseja excluir esse registro?')"
-                                        class="btn btn-primary btn-danger btn-sm" value="{{ materia.id }}">
-                                            <span class="material-icons">close</span>
-                                        </button>
-                                    </form>
-
-                                    {% endif %}
-                                </td>
-                            {% else %}
-                                <td scope="row"></td>
-                            {% endif %}
-                            
-                        {% endfor %}
-                    </tr>
-                    {% endfor %}
-
-            </tbody>
-        </table>
     </div>
 </div>
 
