@@ -37,10 +37,27 @@ def perfil(request):
     else:
         materias_aluno = MateriaAluno.objects.filter(aluno=aluno_logado)
 
-    context = {'materias_aluno_logado':materias_aluno,
-               'dias_semana': np.arange(2,9),
+    materias_aluno_domingo = materias_aluno.filter(dia_semana = 1)
+    materias_aluno_segunda = materias_aluno.filter(dia_semana = 2)
+    materias_aluno_terca = materias_aluno.filter(dia_semana = 3)
+    materias_aluno_quarta = materias_aluno.filter(dia_semana = 4)
+    materias_aluno_quinta = materias_aluno.filter(dia_semana = 5)
+    materias_aluno_sexta = materias_aluno.filter(dia_semana = 6)
+    materias_aluno_sabado = materias_aluno.filter(dia_semana = 7)
+
+    context = {
+                'materias_aluno_domingo':materias_aluno_domingo,
+                'materias_aluno_segunda':materias_aluno_segunda,
+                'materias_aluno_terca':materias_aluno_terca,
+                'materias_aluno_quarta':materias_aluno_quarta,
+                'materias_aluno_quinta':materias_aluno_quinta,
+                'materias_aluno_sexta':materias_aluno_sexta,
+                'materias_aluno_sabado':materias_aluno_sabado,
+                'materias_aluno_logado':materias_aluno,
+               'dias_semana': np.arange(1,8),
                'alunos': User.objects.all(),
                'form': form,
+               'horarios':np.arange(len(materias_aluno)),
                }
 
     return render(request, 'perfil.html', context=context)
@@ -48,12 +65,31 @@ def perfil(request):
 @user_passes_test(lambda u: u.is_superuser)
 def add_materia_aluno(request):
     if request.method == 'POST':
-        form = MateriaAlunoForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('add_materia_aluno')
+
+        aluno = request.POST.get("aluno")
+        materias = request.POST.getlist("materia")
+        dias_semana = request.POST.getlist("dia_semana")
+        horarios_iniciais = request.POST.getlist("horario_inicial")
+        horarios_finais = request.POST.getlist("horario_final")
+        
+        print(list(zip(materias, dias_semana, horarios_iniciais, horarios_finais)))
+
+        for materia, dia_semana, horario_inicial, horario_final in zip(materias, dias_semana, horarios_iniciais, horarios_finais):
+            form = MateriaAlunoForm(data = {
+                                            'aluno': User.objects.filter(id=aluno).first(),
+                                            'materia': Materias.objects.filter(id=materia).first(),
+                                            'dia_semana': dia_semana,
+                                            'horario_inicial': horario_inicial,
+                                            'horario_final': horario_final
+                                            }
+                                    )
+            if form.is_valid():
+                form.save()
+        
+        return render(request, 'add_materia_form.html', {'form': MateriaAlunoForm(), 'msg_sucess':'Registrado com sucesso!'})
     else:
         form = MateriaAlunoForm()
+
     return render(request, 'add_materia_form.html', {'form': form})
 
 @user_passes_test(lambda u: u.is_superuser)

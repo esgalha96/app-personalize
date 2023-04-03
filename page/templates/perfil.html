@@ -24,44 +24,82 @@
 
 <div class="row">
     <div class="col-12">
+
+        <div class="row">
+            <div class="col" style="width: 14.28%; font-weight: bold;">
+                <span>Domingo</span>
+            </div>
+            <div class="col" style="width: 14.28%; font-weight: bold;">
+                <span>Segunda</span>
+            </div>
+            <div class="col" style="width: 14.28%; font-weight: bold;">
+                <span>Terça</span>
+            </div>
+            <div class="col" style="width: 14.28%; font-weight: bold;">
+                <span>Quarta</span>
+            </div>
+            <div class="col" style="width: 14.28%; font-weight: bold;">
+                <span>Quinta</span>
+            </div>
+            <div class="col" style="width: 14.28%; font-weight: bold;">
+                <span>Sexta</span>
+            </div>
+            <div class="col" style="width: 14.28%; font-weight: bold;">
+                <span>Sábado</span>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
         <table class="table table-striped">
             <thead>
                 <tr>
+                    <th scope="col" style="width: 14.28%;">Domingo</th>
                     <th scope="col" style="width: 14.28%;">Segunda</th>
                     <th scope="col" style="width: 14.28%;">Terça</th>
                     <th scope="col" style="width: 14.28%;">Quarta</th>
                     <th scope="col" style="width: 14.28%;">Quinta</th>
                     <th scope="col" style="width: 14.28%;">Sexta</th>
                     <th scope="col" style="width: 14.28%;">Sábado</th>
-                    <th scope="col" style="width: 14.28%;">Domingo</th>
                 </tr>
             </thead>
             <tbody>
-                
-                {% for materia in materias_aluno_logado %}
-                <tr>
-                    {% for dia_da_semana in dias_semana %}
-                        {% if materia.dia_semana == dia_da_semana  %}
-                            <td scope="row">{{ materia.materia }} ({{ materia.horario_inicial }} às {{ materia.horario_final }})
-                                
-                                {% if user.is_superuser %}
-                                <input type="hidden" name="id_materia_aluno_logado" value="{{ materia.id }}">
-                                <form action="" method="post">
-                                    {% csrf_token %}
-                                    <button name="excluir_materia_aluno" onclick="return confirm('Deseja excluir esse registro?')"
-                                     class="btn btn-primary btn-danger btn-sm" value="{{ materia.id }}">
-                                        <span class="material-icons">close</span>
-                                    </button>
-                                </form>
 
-                                {% endif %}
-                            </td>
-                        {% else %}
-                            <td scope="row"></td>
-                        {% endif %}
+                    {% for materia in materias_aluno_logado %}
+                    <tr>
+                        {% for dia_da_semana in dias_semana %}
+                            
+                            {% if materia.dia_semana == dia_da_semana  %}
+                                <td scope="row">{{ materia.materia }} ({{ materia.horario_inicial }} às {{ materia.horario_final }})
+                                    
+                                    {% if user.is_superuser %}
+                                    <input type="hidden" name="id_materia_aluno_logado" value="{{ materia.id }}">
+                                    <form action="" method="post">
+                                        {% csrf_token %}
+                                        <button name="excluir_materia_aluno" onclick="return confirm('Deseja excluir esse registro?')"
+                                        class="btn btn-primary btn-danger btn-sm" value="{{ materia.id }}">
+                                            <span class="material-icons">close</span>
+                                        </button>
+                                    </form>
+
+                                    {% endif %}
+                                </td>
+                            {% else %}
+                                <td scope="row"></td>
+                            {% endif %}
+                            
+                        {% endfor %}
+                    </tr>
                     {% endfor %}
-                </tr>
-                {% endfor %}
+
             </tbody>
         </table>
     </div>
